@@ -74,7 +74,7 @@ Chatfuel.prototype.newGallery = function () {
         "elements": []
       }
     }
-  });
+  }) - 1;
 }
 
 
@@ -205,6 +205,8 @@ Chatfuel.prototype.toJson = function () {
   return JSON.stringify(this.ChatFueledAnswer);
 };
 
+
+//////////// TESTS ZONE /////////////
 var someTests = new Chatfuel();
 var someTests2 = new Chatfuel();
 var someTests3 = new Chatfuel();
@@ -213,7 +215,7 @@ someTests.addMessage("Test message 2");
 someTests.addImage("https://media.giphy.com/media/3oz8xPKZN7EwfcD0ys/giphy.gif");
 someTests.addFile("https://www.lyca.ch/images/eleves/TM_Guide_Redaction_EPFL.pdf");
 
-var newGallery = someTests.newGallery() - 1;
+var newGallery = someTests.newGallery();
 someTests.addElementToGallery(
   newGallery,
   "My first gallery",
@@ -239,6 +241,6 @@ someTests2.addButtons(
 
 //console.log(someTests2.toJson());
 
-someTests3.addUserAttributes("name","moez");
+someTests3.addUserAttributes("name","tunilame");
 someTests3.addUserAttributes("age","30");
 console.log(someTests3.toJson());
