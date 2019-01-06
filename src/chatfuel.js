@@ -150,36 +150,36 @@ Chatfuel.prototype.addButtons = function () {
  * - json_plugin_url: send another request to your backend
  * - phone_number: call a phone number
  * - [ONLY ON GALLERY] element_share: To share the current element [ONLY ON GALLERY]
- * @param url_blocks_phone This can be 
+ * @param target This can be 
  * - if request_type = show_block:  a list of block names (["block 1", "block 2"]) ,
  * - if request_type = show_block OR json_plugin_url: a web link,
  * - if request_type = phone_number: a phone number (format: +19268881413).
  * @param title the title that will be show over the button
  */
-Chatfuel.prototype.sanitizeToButton = function (request_type, url_blocks_phone, title) {
+Chatfuel.prototype.sanitizeToButton = function (request_type, target, title) {
   var result = {};
   if (request_type == "web_url")
     result = {
       "type": request_type,
-      "url": url_blocks_phone,
+      "url": target,
       "title": title
     };
   else if (request_type == "show_block")
     result = {
       "type": request_type,
-      "block_names": url_blocks_phone,
+      "block_names": target,
       "title": title
     };
   else if (request_type == "json_plugin_url")
     result = {
       "type": request_type,
-      "url": url_blocks_phone,
+      "url": target,
       "title": title
     };
   else if (request_type == "phone_number")
     result = {
       "type": request_type,
-      "phone_number": url_blocks_phone,
+      "phone_number": target,
       "title": title
     };
   else if (request_type == "element_share")
@@ -207,40 +207,40 @@ Chatfuel.prototype.toJson = function () {
 
 
 //////////// TESTS ZONE /////////////
-var someTests = new Chatfuel();
-var someTests2 = new Chatfuel();
-var someTests3 = new Chatfuel();
-someTests.addMessage("Test message 1");
-someTests.addMessage("Test message 2");
-someTests.addImage("https://media.giphy.com/media/3oz8xPKZN7EwfcD0ys/giphy.gif");
-someTests.addFile("https://www.lyca.ch/images/eleves/TM_Guide_Redaction_EPFL.pdf");
+var chatfuelled = new Chatfuel();
+var chatfuelled2 = new Chatfuel();
+var chatfuelled3 = new Chatfuel();
+chatfuelled.addMessage("Test message 1");
+chatfuelled.addMessage("Test message 2");
+chatfuelled.addImage("https://media.giphy.com/media/3oz8xPKZN7EwfcD0ys/giphy.gif");
+chatfuelled.addFile("https://www.lyca.ch/images/eleves/TM_Guide_Redaction_EPFL.pdf");
 
-var newGallery = someTests.newGallery();
-someTests.addElementToGallery(
+var newGallery = chatfuelled.newGallery();
+chatfuelled.addElementToGallery(
   newGallery,
   "My first gallery",
   "https://www.jqueryscript.net/images/jQuery-Plugin-For-Stacked-Polaroid-Image-Gallery-Photopile.jpg",
   "My amazing description",
-  someTests.sanitizeToButton("web_url", "https://www.jqueryscript.net/gallery/jQuery-Plugin-For-Stacked-Polaroid-Image-Gallery-Photopile.html", "TITLEEEE"),
-  someTests.sanitizeToButton("show_block", ["Bye 1", "Bye 2"], "bye")
+  chatfuelled.sanitizeToButton("web_url", "https://www.jqueryscript.net/gallery/jQuery-Plugin-For-Stacked-Polaroid-Image-Gallery-Photopile.html", "jQuery Gallery plugin"),
+  chatfuelled.sanitizeToButton("show_block", ["Bye 1", "Bye 2"], "bye")
 );
-someTests.addElementToGallery(
+chatfuelled.addElementToGallery(
   newGallery,
   "My second gallery",
   "http://shivagallery.org/wp-content/uploads/2015/01/img_0789-370x247.jpg",
   "My amazing description 2",
-  someTests.sanitizeToButton("web_url", "https://www.google.ch/", "TITLEEEE"),
-  someTests.sanitizeToButton("show_block", ["Bye 1", "Bye 2"], "Bye 2")
+  chatfuelled.sanitizeToButton("web_url", "https://www.google.ch/", "TITLEEEE"),
+  chatfuelled.sanitizeToButton("show_block", ["Bye 1", "Bye 2"], "Bye 2")
 );
-someTests2.addButtons(
+chatfuelled2.addButtons(
   "my amazing buttons",
-  someTests.sanitizeToButton("web_url", "https://www.google.ch/", "TITLEEEE"),
-  someTests.sanitizeToButton("web_url", "https://www.google.ch/maps", "Title 2"),
-  someTests.sanitizeToButton("show_block", ["Bye 1", "Bye 2"], "BYE 3")
+  chatfuelled.sanitizeToButton("web_url", "https://www.google.ch/", "Go to Goole"),
+  chatfuelled.sanitizeToButton("web_url", "https://www.google.ch/maps", "Title 2"),
+  chatfuelled.sanitizeToButton("show_block", ["Bye 1", "Bye 2"], "BYE 3")
 );
 
-//console.log(someTests2.toJson());
+//console.log(chatfuelled2.toJson());
 
-someTests3.addUserAttributes("name","tunilame");
-someTests3.addUserAttributes("age","30");
-console.log(someTests3.toJson());
+chatfuelled3.addUserAttributes("name","tunilame");
+chatfuelled3.addUserAttributes("age","30");
+console.log(chatfuelled3.toJson());
