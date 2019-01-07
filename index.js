@@ -1,6 +1,8 @@
 "use strict";
 /**
  * Chatfuel class. Use its methods to prepare the Chatfuel's JSON response.
+ * 
+ * @constructor
  * @todo Quick reply
  */
 function Chatfuel() {
@@ -32,8 +34,8 @@ Chatfuel.prototype.addFile = function (url) {
 /**
  * Add a media (via link)
  * 
- * @param url The link of the media you want to add
- * @param mediaType The type of the media you want to add. 
+ * @param {String} url The link of the media you want to add
+ * @param {String} mediaType The type of the media you want to add. 
  * It can be: image, video, audio or file
  * 
  */
@@ -51,7 +53,7 @@ Chatfuel.prototype.addMedia = function (url, mediaType) {
 /**
  * Add a text message
  * 
- * @param msg the text you want to show to the user
+ * @param {String} msg the text you want to show to the user
  */
 Chatfuel.prototype.addMessage = function (msg) {
   var msgJson = { "text": msg };
@@ -62,7 +64,7 @@ Chatfuel.prototype.addMessage = function (msg) {
 /**
  * Add a new Gallery. 
  * 
- * @returns the gallery's ID.
+ * @return {int} the gallery's ID.
  */
 Chatfuel.prototype.newGallery = function () {
   return this.ChatFueledAnswer.messages.push({

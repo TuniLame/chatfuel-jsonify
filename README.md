@@ -1,5 +1,8 @@
 # ChatFuel JSON API NodeJS library
 This library enables you to create the right JSON format for the Chatfuel JSON API.
+
+This library can be used ES5 with compatible Node versions. 
+
 Chatfuel is an easy to use Messenger Bot creation platform.
 
 ## Chatfuel JSON API
