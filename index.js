@@ -83,14 +83,14 @@ Chatfuel.prototype.newGallery = function () {
 /**
  * Add one element to a gallery.
  * 
- * @param galleryID the gallery ID on the messages list.
- * @param elementTitle Element: "title"
- * @param elementImgUrl Element: "image_url"
- * @param elementSubtitle Element: "subtitle"
- * @param buttons 1 button per parameter. 5 buttons max. Use sanitizeToButton 
+ * @param {int} galleryID the gallery ID on the messages list.
+ * @param {String} elementTitle Element: "title"
+ * @param {String} elementImgUrl Element: "image_url"
+ * @param {String} elementSubtitle Element: "subtitle"
+ * @param {JSON} buttons 1 button per parameter. 5 buttons max. Use sanitizeToButton 
  * for the correct fomat
  * 
- * @returns true if the element was added. False otherwise.
+ * @returns {boolean} true if the element was added. False otherwise.
  */
 Chatfuel.prototype.addElementToGallery = function () {
   if (arguments.length < 5)
@@ -200,6 +200,15 @@ Chatfuel.prototype.addUserAttributes = function (attribute, value){
   this.ChatFueledAnswer.set_attributes[attribute] = value;
 }
 
+Chatfuel.prototype.redirectToBlocks = function (blocks){
+  if (typeof this.ChatFueledAnswer.redirect_to_blocs === 'undefined') {
+    // We don't have any message. Let's add our first message
+    this.ChatFueledAnswer.redirect_to_blocs = [];
+  }
+  for (var i = 0; i< blocks.length; i++ )
+    this.ChatFueledAnswer.redirect_to_blocs.push(blocks[i]);
+}
+
 /** 
  * Convert the current Chatfuel object to JSON for export to Chatfuel.com
  */
@@ -245,4 +254,5 @@ chatfuelled2.addButtons(
 
 chatfuelled3.addUserAttributes("name","tunilame");
 chatfuelled3.addUserAttributes("age","30");
-console.log(chatfuelled3.toJson());
+chatfuelled3.redirectToBlocks(["block1"]);
+//console.log(chatfuelled3.toJson());
