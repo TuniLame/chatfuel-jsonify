@@ -235,7 +235,7 @@ chatfuelled.addElementToGallery(
 chatfuelled2.addButtons(
   "my amazing buttons",
   chatfuelled.sanitizeToButton("web_url", "https://www.google.ch/", "Go to Goole"),
-  chatfuelled.sanitizeToButton("web_url", "https://www.google.ch/maps", "Title 2"),
+  chatfuelled.sanitizeToButton("web_url", "https://www.google.ch/maps", "Go to Maps"),
   chatfuelled.sanitizeToButton("show_block", ["Bye 1", "Bye 2"], "BYE 3")
 );
 
