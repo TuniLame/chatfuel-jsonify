@@ -1,4 +1,4 @@
-# ChatFuel JSON API NodeJS library
+# ChatFuel JSON API NodeJS library (TESTING)
 This library enables you to create the right JSON format for the Chatfuel JSON API.
 
 This library can be used ES5 with compatible Node versions. 
