@@ -1,0 +1,24 @@
+{
+  "name": "chatfuel-jsonify",
+  "version": "0.1.0",
+  "description": "This library enables you to create the right JSON format for the Chatfuel JSON API.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TuniLame/chatfuel-jsonify.git"
+  },
+  "keywords": [
+    "chatfuel",
+    "json",
+    "api"
+  ],
+  "author": "Moez Maâmer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TuniLame/chatfuel-jsonify/issues"
+  },
+  "homepage": "https://github.com/TuniLame/chatfuel-jsonify#readme"
+}
