@@ -13,7 +13,7 @@ function Chatfuel() {
   }
 
 }
-
+module.exports = Chatfuel;
 
 Chatfuel.prototype.addImage = function (url) {
   this.addMedia(url, "image");
