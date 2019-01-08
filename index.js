@@ -171,9 +171,7 @@ Chatfuel.prototype.sanitizeToButton = function () {
     for (var i = 0; i < (arguments.length-3); i++){
       result.set_attributes[arguments[3+i]] = arguments[3+i+1];
       i = i + 1;
-      console.log(i);
     }
-    console.log(result);
   }
   
   result.type = request_type;
@@ -208,12 +206,12 @@ Chatfuel.prototype.addUserAttributes = function (attribute, value){
 }
 
 Chatfuel.prototype.redirectToBlocks = function (blocks){
-  if (typeof this.ChatFueledAnswer.redirect_to_blocs === 'undefined') {
+  if (typeof this.ChatFueledAnswer.redirect_to_blocks === 'undefined') {
     // We don't have any message. Let's add our first message
-    this.ChatFueledAnswer.redirect_to_blocs = [];
+    this.ChatFueledAnswer.redirect_to_blocks = [];
   }
   for (var i = 0; i< blocks.length; i++ )
-    this.ChatFueledAnswer.redirect_to_blocs.push(blocks[i]);
+    this.ChatFueledAnswer.redirect_to_blocks.push(blocks[i]);
 }
 
 /** 
@@ -284,4 +282,4 @@ chatfuelled2.addButtons(
 chatfuelled3.addUserAttributes("name","tunilame");
 chatfuelled3.addUserAttributes("age","30");
 chatfuelled3.redirectToBlocks(["block1"]);
-console.log(chatfuelled2.toJson(true));
+//console.log(chatfuelled2.toJson(true));
