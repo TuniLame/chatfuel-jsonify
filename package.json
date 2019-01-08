@@ -1,6 +1,6 @@
 {
   "name": "chatfuel-jsonify",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "This library enables you to create the right JSON format for the Chatfuel JSON API.",
   "main": "index.js",
   "scripts": {
