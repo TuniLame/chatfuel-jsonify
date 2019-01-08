@@ -90,7 +90,7 @@ Messenger also supports specialised buttons:
 | Attribute    | Type   | Required | Description                                                  |
 | ------------ | ------ | -------- | ------------------------------------------------------------ |
 | request_type | string | yes      | **Must be one of these**: <br />- web_url: URL<br />- show_block: redirect to block<br />- json_plugin_url: send another request to your backend<br />- phone_number: call a phone number<br />- [ONLY ON GALLERY] element_share: To share the current element |
-| target       | string | yes      | Must be:<br />- _if _request_type_ = _show_block:_  a list of block names (["block 1", "block 2"]) or<br />- if _request_type_ = _show_block_ OR _json_plugin_url_: a web link or<br />- if _request_type_ = _phone_number_: a phone number (format: +19268881413). |
+| target       | string | yes      | Must be:<br />- _if _request_type_ = _show_block:_  a list of block names (["block 1", "block 2"]) or<br />- if _request_type_ = _web_url_ OR _json_plugin_url_: a web link or<br />- if _request_type_ = _phone_number_: a phone number (format: +19268881413). |
 | title        | string | yes      | Button's title. Will be shown over the button.               |
 
 ##### Example

@@ -146,48 +146,55 @@ Chatfuel.prototype.addButtons = function () {
  * - List
  * - Buttons
  * 
- * @param request_type can be 
+ * @param {String} request_type can be 
  * - web_url: URL
  * - show_block: redirect to block
  * - json_plugin_url: send another request to your backend
  * - phone_number: call a phone number
  * - [ONLY ON GALLERY] element_share: To share the current element [ONLY ON GALLERY]
- * @param target This can be 
+ * @param {String} target This can be 
  * - if request_type = show_block:  a list of block names (["block 1", "block 2"]) ,
  * - if request_type = show_block OR json_plugin_url: a web link,
  * - if request_type = phone_number: a phone number (format: +19268881413).
- * @param title the title that will be show over the button
+ * @param {String} title the title that will be show over the button
+ * @param {String} attributes (Optional) a list of names and values attributes 
+ * seperated by a comma
  */
-Chatfuel.prototype.sanitizeToButton = function (request_type, target, title) {
+Chatfuel.prototype.sanitizeToButton = function () {
+  var request_type = arguments[0];
+  var target = arguments[1];
+  var title = arguments[2];
   var result = {};
-  if (request_type == "web_url")
-    result = {
-      "type": request_type,
-      "url": target,
-      "title": title
-    };
-  else if (request_type == "show_block")
-    result = {
-      "type": request_type,
-      "block_names": target,
-      "title": title
-    };
-  else if (request_type == "json_plugin_url")
-    result = {
-      "type": request_type,
-      "url": target,
-      "title": title
-    };
-  else if (request_type == "phone_number")
-    result = {
-      "type": request_type,
-      "phone_number": target,
-      "title": title
-    };
+  // Extract attributes
+  if ((arguments.length > 3) && (arguments.length % 2 != 0 )){
+    result.set_attributes = {};
+    for (var i = 0; i < (arguments.length-3); i++){
+      result.set_attributes[arguments[3+i]] = arguments[3+i+1];
+      i = i + 1;
+      console.log(i);
+    }
+    console.log(result);
+  }
+  
+  result.type = request_type;
+  if (request_type == "web_url"){
+    result.url = target;
+    result.title = title;
+  }
+  else if (request_type == "show_block"){
+    result.block_names = target;
+    result.title = title;
+  }
+  else if (request_type == "json_plugin_url"){
+    result.url = target;
+    result.title = title;
+  }
+  else if (request_type == "phone_number"){
+    result.phone_number = target;
+    result.title = title;
+  }
   else if (request_type == "element_share")
-    result = {
-      "type": request_type
-    };
+    result.type = request_type;
   return result;
 };
 
@@ -211,9 +218,15 @@ Chatfuel.prototype.redirectToBlocks = function (blocks){
 
 /** 
  * Convert the current Chatfuel object to JSON for export to Chatfuel.com
+ * 
+ * 
  */
-Chatfuel.prototype.toJson = function () {
-  return JSON.stringify(this.ChatFueledAnswer);
+Chatfuel.prototype.toJson = function (stringify) {
+  var stringify = stringify == null ? "nothing" : stringify;
+  if (stringify == "nothing")
+    return this.ChatFueledAnswer;
+  else if (stringify == true)
+    return JSON.stringify(this.ChatFueledAnswer);
 };
 
 
@@ -245,9 +258,25 @@ chatfuelled.addElementToGallery(
 );
 chatfuelled2.addButtons(
   "my amazing buttons",
-  chatfuelled.sanitizeToButton("web_url", "https://www.google.ch/", "Go to Goole"),
-  chatfuelled.sanitizeToButton("web_url", "https://www.google.ch/maps", "Go to Maps"),
-  chatfuelled.sanitizeToButton("show_block", ["Bye 1", "Bye 2"], "BYE 3")
+  chatfuelled2.sanitizeToButton("web_url", "https://www.google.ch/", "Go to Goole"),
+  chatfuelled2.sanitizeToButton(
+    "web_url", 
+    "https://www.google.ch/maps", 
+    "Go to Maps",
+    "Web title",
+    "Web value"),
+  chatfuelled2.sanitizeToButton(
+    "show_block", 
+    ["Bye 1", "Bye 2"], 
+    "BYE 3",
+    "title",
+    "value",
+    "title2",
+    "value",
+    "title3",
+    "value",
+    "title4",
+    "value")
 );
 
 //console.log(chatfuelled2.toJson());
@@ -255,4 +284,4 @@ chatfuelled2.addButtons(
 chatfuelled3.addUserAttributes("name","tunilame");
 chatfuelled3.addUserAttributes("age","30");
 chatfuelled3.redirectToBlocks(["block1"]);
-//console.log(chatfuelled3.toJson());
+console.log(chatfuelled2.toJson(true));
