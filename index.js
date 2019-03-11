@@ -64,15 +64,20 @@ Chatfuel.prototype.addMessage = function (msg) {
 /**
  * Add a new Gallery. 
  * 
+ * @param {string} galleryAspectRatio The gallery's image aspect. You can put "square" or
+ * "horizontal"
+ * 
  * @return {int} the gallery's ID.
  */
-Chatfuel.prototype.newGallery = function () {
+Chatfuel.prototype.newGallery = function (galleryAspectRatio) {
+  if (galleryAspectRatio != "square" && galleryAspectRatio != "horizontal")
+    galleryAspectRatio = "square"
   return this.ChatFueledAnswer.messages.push({
     "attachment": {
       "type": "template",
       "payload": {
         "template_type": "generic",
-        "image_aspect_ratio": "square",
+        "image_aspect_ratio": galleryAspectRatio,
         "elements": []
       }
     }
@@ -277,7 +282,7 @@ chatfuelled2.addButtons(
     "value")
 );
 
-//console.log(chatfuelled2.toJson());
+console.log(chatfuelled.toJson(true));
 
 chatfuelled3.addUserAttributes("name","tunilame");
 chatfuelled3.addUserAttributes("age","30");

@@ -10,7 +10,9 @@ The Chatfuel JSON API is well documented on the Chatfuel.com website. It can be 
 
 ## Install
 
-Soon to come... 
+```bash
+npm install --save chatfuel-jsonify
+```
 
 ## Library usage
 This library helps you only to create the right JSON format. The result must then be read by Chatfuel API.
@@ -69,6 +71,10 @@ chatfuelled.addImage("https://media.giphy.com/media/3oz8xPKZN7EwfcD0ys/giphy.gif
 #### .newGallery()
 
 Create a new empty horizontal scrollable gallery. You need to add one element minimum using  **.addElementToGallery** (described below)
+
+| Attribute          | Type   | Required | Description                                                  |
+| ------------------ | ------ | -------- | ------------------------------------------------------------ |
+| galleryAspectRatio | string | no       | Choose the gallery's image aspect ratio. Can be either "square" or "horizontal" |
 
 **Return** Gallery's ID
 
