@@ -10,7 +10,9 @@ The Chatfuel JSON API is well documented on the Chatfuel.com website. It can be 
 
 ## Install
 
-Soon to come... 
+```bash
+npm install --save chatfuel-jsonify
+```
 
 ## Library usage
 This library helps you only to create the right JSON format. The result must then be read by Chatfuel API.
@@ -70,6 +72,10 @@ chatfuelled.addImage("https://media.giphy.com/media/3oz8xPKZN7EwfcD0ys/giphy.gif
 
 Create a new empty horizontal scrollable gallery. You need to add one element minimum using  **.addElementToGallery** (described below)
 
+| Attribute          | Type   | Required | Description                                                  |
+| ------------------ | ------ | -------- | ------------------------------------------------------------ |
+| galleryAspectRatio | string | no       | Choose the gallery's image aspect ratio. Can be either "square" or "horizontal" |
+
 **Return** Gallery's ID
 
 ##### Example
@@ -90,7 +96,7 @@ Messenger also supports specialised buttons:
 | Attribute    | Type   | Required | Description                                                  |
 | ------------ | ------ | -------- | ------------------------------------------------------------ |
 | request_type | string | yes      | **Must be one of these**: <br />- web_url: URL<br />- show_block: redirect to block<br />- json_plugin_url: send another request to your backend<br />- phone_number: call a phone number<br />- [ONLY ON GALLERY] element_share: To share the current element |
-| target       | string | yes      | Must be:<br />- _if _request_type_ = _show_block:_  a list of block names (["block 1", "block 2"]) or<br />- if _request_type_ = _show_block_ OR _json_plugin_url_: a web link or<br />- if _request_type_ = _phone_number_: a phone number (format: +19268881413). |
+| target       | string | yes      | Must be:<br />- _if _request_type_ = _show_block:_  a list of block names (["block 1", "block 2"]) or<br />- if _request_type_ = _web_url_ OR _json_plugin_url_: a web link or<br />- if _request_type_ = _phone_number_: a phone number (format: +19268881413). |
 | title        | string | yes      | Button's title. Will be shown over the button.               |
 
 ##### Example
