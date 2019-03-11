@@ -282,7 +282,7 @@ chatfuelled2.addButtons(
     "value")
 );
 
-console.log(chatfuelled.toJson(true));
+//console.log(chatfuelled.toJson(true));
 
 chatfuelled3.addUserAttributes("name","tunilame");
 chatfuelled3.addUserAttributes("age","30");
