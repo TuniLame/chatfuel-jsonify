@@ -92,7 +92,7 @@ Chatfuel.prototype.newGallery = function (galleryAspectRatio) {
  * @param {String} elementTitle Element: "title"
  * @param {String} elementImgUrl Element: "image_url"
  * @param {String} elementSubtitle Element: "subtitle"
- * @param {JSON} buttons 1 button per parameter. 5 buttons max. Use sanitizeToButton 
+ * @param {JSON} buttons 1 button per parameter. 3 buttons max. Use sanitizeToButton 
  * for the correct fomat
  * 
  * @returns {boolean} true if the element was added. False otherwise.
@@ -100,7 +100,7 @@ Chatfuel.prototype.newGallery = function (galleryAspectRatio) {
 Chatfuel.prototype.addElementToGallery = function () {
   if (arguments.length < 5)
     return false;
-  if (arguments.length > 9)
+  if (arguments.length > 7)
     return false;
   var galleryID = arguments[0];
   var elementTitle = arguments[1];
@@ -116,9 +116,28 @@ Chatfuel.prototype.addElementToGallery = function () {
   for (var i = 4; i < arguments.length; i++) {
     element.buttons.push(arguments[i]);
   }
-  this.ChatFueledAnswer.messages[galleryID].attachment.payload.elements.push(element);
-  return true;
+  return this.ChatFueledAnswer.messages[galleryID].attachment.payload.elements.push(element)-1;
 };
+
+Chatfuel.prototype.addDefaultActionToElement= function (
+  galleryID,
+  elementID,
+  type = "web_view", 
+  url,
+  messenger_extensions = false,
+  webview_height_ratio = "tall",
+  fallback_url = "null") {
+  
+  var default_action = {
+    "type": type,
+    "url": url,
+		"messenger_extensions": messenger_extensions,
+		"webview_height_ratio": webview_height_ratio,
+		"fallback_url": (fallback_url == "null" ? url :  fallback_url)
+  }
+  this.ChatFueledAnswer.messages[galleryID].attachment.payload.elements[elementID]["default_action"] = default_action;
+  return true;
+}
 
 Chatfuel.prototype.addButtons = function () {
   if (arguments.length < 2)
@@ -231,60 +250,3 @@ Chatfuel.prototype.toJson = function (stringify) {
   else if (stringify == true)
     return JSON.stringify(this.ChatFueledAnswer);
 };
-
-
-//////////// TESTS ZONE /////////////
-var chatfuelled = new Chatfuel();
-var chatfuelled2 = new Chatfuel();
-var chatfuelled3 = new Chatfuel();
-chatfuelled.addMessage("Test message 1");
-chatfuelled.addMessage("Test message 2");
-chatfuelled.addImage("https://media.giphy.com/media/3oz8xPKZN7EwfcD0ys/giphy.gif");
-chatfuelled.addFile("https://www.lyca.ch/images/eleves/TM_Guide_Redaction_EPFL.pdf");
-
-var newGallery = chatfuelled.newGallery();
-chatfuelled.addElementToGallery(
-  newGallery,
-  "My first gallery",
-  "https://www.jqueryscript.net/images/jQuery-Plugin-For-Stacked-Polaroid-Image-Gallery-Photopile.jpg",
-  "My amazing description",
-  chatfuelled.sanitizeToButton("web_url", "https://www.jqueryscript.net/gallery/jQuery-Plugin-For-Stacked-Polaroid-Image-Gallery-Photopile.html", "jQuery Gallery plugin"),
-  chatfuelled.sanitizeToButton("show_block", ["Bye 1", "Bye 2"], "bye")
-);
-chatfuelled.addElementToGallery(
-  newGallery,
-  "My second gallery",
-  "http://shivagallery.org/wp-content/uploads/2015/01/img_0789-370x247.jpg",
-  "My amazing description 2",
-  chatfuelled.sanitizeToButton("web_url", "https://www.google.ch/", "TITLEEEE"),
-  chatfuelled.sanitizeToButton("show_block", ["Bye 1", "Bye 2"], "Bye 2")
-);
-chatfuelled2.addButtons(
-  "my amazing buttons",
-  chatfuelled2.sanitizeToButton("web_url", "https://www.google.ch/", "Go to Goole"),
-  chatfuelled2.sanitizeToButton(
-    "web_url", 
-    "https://www.google.ch/maps", 
-    "Go to Maps",
-    "Web title",
-    "Web value"),
-  chatfuelled2.sanitizeToButton(
-    "show_block", 
-    ["Bye 1", "Bye 2"], 
-    "BYE 3",
-    "title",
-    "value",
-    "title2",
-    "value",
-    "title3",
-    "value",
-    "title4",
-    "value")
-);
-
-//console.log(chatfuelled.toJson(true));
-
-chatfuelled3.addUserAttributes("name","tunilame");
-chatfuelled3.addUserAttributes("age","30");
-chatfuelled3.redirectToBlocks(["block1"]);
-//console.log(chatfuelled2.toJson(true));
