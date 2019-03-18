@@ -92,7 +92,7 @@ Chatfuel.prototype.newGallery = function (galleryAspectRatio) {
  * @param {String} elementTitle Element: "title"
  * @param {String} elementImgUrl Element: "image_url"
  * @param {String} elementSubtitle Element: "subtitle"
- * @param {JSON} buttons 1 button per parameter. 5 buttons max. Use sanitizeToButton 
+ * @param {JSON} buttons 1 button per parameter. 3 buttons max. Use sanitizeToButton 
  * for the correct fomat
  * 
  * @returns {boolean} true if the element was added. False otherwise.
@@ -100,7 +100,7 @@ Chatfuel.prototype.newGallery = function (galleryAspectRatio) {
 Chatfuel.prototype.addElementToGallery = function () {
   if (arguments.length < 5)
     return false;
-  if (arguments.length > 9)
+  if (arguments.length > 7)
     return false;
   var galleryID = arguments[0];
   var elementTitle = arguments[1];

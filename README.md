@@ -31,6 +31,20 @@ var chatfuelled = new Chatfuel();
 
 Now you can start creating your final JSON result using the methods described below.
 
+### Create JSON format to send to Chatfuel
+
+When you're ready to send all data to Chatfuel, start by getting the JSON format:
+
+```js
+var result = chatfuelled.toJson();
+```
+
+You can the send it using, with express for example:
+
+```js
+res.json(chatfuelled.toJson());
+```
+
 ### Methods
 
 #### .addMessage (message)
@@ -107,7 +121,7 @@ chatfuelled.sanitizeToButton("web_url", "https://www.google.ch/", "Go to Goole")
 
 #### .addElementToGallery (gallery_id, title, img_url, description, buttons...)
 
-Add a new element to _gallery_id_. An element is by a title, an image, a description and buttons to request input from the user. Each element can have up to 5 buttons.
+Add a new element to _gallery_id_. An element is by a title, an image, a description and buttons to request input from the user. Each element can have up to 3 buttons.
 
 | Attribute   | Type   | Required | Description                                                  |
 | ----------- | ------ | -------- | ------------------------------------------------------------ |
@@ -117,7 +131,7 @@ Add a new element to _gallery_id_. An element is by a title, an image, a descrip
 | description | string | yes      | Some description for the _subtitle_ tag                      |
 | button1     | JSON   | yes      | 1 to 5 buttons added as parameters. Use _.sanitizeToButton()_ for each button to generate the needed code. See the example below |
 | ...         |        | no       |                                                              |
-| button5     | JSON   | no       |                                                              |
+| button3     | JSON   | no       |                                                              |
 
 ##### Example
 
